@@ -18,8 +18,6 @@ namespace IsValid.Tests.String
             get
             {
                 //copied from https://github.com/chriso/validator.js/blob/master/test/validators.js
-                yield return new TestCaseData("07999999999", "en-GB").Returns(true);
-
 
                 yield return new TestCaseData("15323456787", "zh-CN").Returns(true);
                 yield return new TestCaseData("13523333233", "zh-CN").Returns(true);
