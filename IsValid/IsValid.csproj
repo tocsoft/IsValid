@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="String\IsCreditCard.cs" />
     <Compile Include="String\IsEmail.cs" />
     <Compile Include="String\IsIPAddress.cs" />
     <Compile Include="String\IsLowercase.cs" />
