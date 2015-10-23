@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="String\IsIPAddress.cs" />
     <Compile Include="String\IsLowercase.cs" />
     <Compile Include="String\IsMobilePhone.cs" />
     <Compile Include="String\IsNumeric.cs" />
