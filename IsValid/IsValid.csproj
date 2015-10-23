@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="String\IsMobilePhone.cs" />
+    <Compile Include="String\IsUppercase.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="IValidatableValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
