@@ -15,6 +15,7 @@ namespace IsValid.Tests.String
     {
 
         [Test]
+        [TestCase(null, ExpectedResult = true)]
         [TestCase("foo", ExpectedResult = true)]
         [TestCase("FOO", ExpectedResult = false)]
         [TestCase("123", ExpectedResult = true)]

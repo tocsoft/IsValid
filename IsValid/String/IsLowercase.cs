@@ -17,7 +17,7 @@ namespace IsValid
         /// <returns></returns>
         public static bool Lowercase(this IValidatableValue<string> input)
         {
-            if(!input.IsValueSet && input.Value == null)
+            if(!input.IsValueSet || input.Value == null)
             {
                 return true;
             }
