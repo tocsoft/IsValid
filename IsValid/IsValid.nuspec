@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <authors>Tocsoft</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Fluent framework for validating values.</description>
+        <projectUrl>https://github.com/tocsoft/IsValid</projectUrl>
+        <licenseUrl>https://github.com/tocsoft/IsValid/blob/master/LICENCE.md</licenseUrl>
+        <tags>Validation MobilePhone CreditCard Validate</tags>
+    </metadata>
+    <files>
+        <file src="..\icon.png" target="" />
+    </files>
+</package>
