@@ -1,10 +1,4 @@
 @echo Off
-
-WHERE mycommand
-IF NOT  "%ERRORLEVEL%" == "0" (
-  GitVersion /output buildserver
-)
-
 ECHO Starting build
 
 set config=%1
