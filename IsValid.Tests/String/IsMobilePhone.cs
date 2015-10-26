@@ -115,13 +115,13 @@ namespace IsValid.Tests.String
                 // Lack of test data in original Validator.js.
                 yield return new TestCaseData("+351919706735", "pt-PT").Returns(true);
 
-                yield return new TestCaseData("447789345856", "en-GB").Returns(true);
-                yield return new TestCaseData("+447861235675", "en-GB").Returns(true);
-                yield return new TestCaseData("07888814488", "en-GB").Returns(true);
+                yield return new TestCaseData("447700956823", "en-GB").Returns(true);
+                yield return new TestCaseData("+447700956823", "en-GB").Returns(true);
+                yield return new TestCaseData("07700956823", "en-GB").Returns(true);
                 yield return new TestCaseData("67699567", "en-GB").Returns(false);
-                yield return new TestCaseData("0773894868", "en-GB").Returns(false);
-                yield return new TestCaseData("077389f8688", "en-GB").Returns(false);
-                yield return new TestCaseData("+07888814488", "en-GB").Returns(false);
+                yield return new TestCaseData("0770095682", "en-GB").Returns(false);
+                yield return new TestCaseData("077009f6823", "en-GB").Returns(false);
+                yield return new TestCaseData("+07700956823", "en-GB").Returns(false);
                 yield return new TestCaseData("0152456999", "en-GB").Returns(false);
                 yield return new TestCaseData("442073456754", "en-GB").Returns(false);
                 yield return new TestCaseData("+443003434751", "en-GB").Returns(false);
