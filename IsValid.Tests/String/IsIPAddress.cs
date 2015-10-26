@@ -142,5 +142,16 @@ namespace IsValid.Tests.String
         {
             Assert.IsFalse(value.IsValid().IPAddress());
         }
+
+        [Test]
+        public void ReturnsFalseIfNoFamiliesSpecifiedEmpty()
+        {
+            Assert.IsFalse("127.0.0.1".IsValid().IPAddress(new System.Net.Sockets.AddressFamily[0]));
+        }
+        [Test]
+        public void ReturnsFalseIfNoFamiliesSpecifiedNull()
+        {
+            Assert.IsFalse("127.0.0.1".IsValid().IPAddress((System.Net.Sockets.AddressFamily[])null));
+        }
     }
 }

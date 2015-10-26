@@ -15,6 +15,10 @@ namespace IsValid.Tests.String
     {
 
         [Test]
+        [TestCase(null, ExpectedResult = false)]
+        [TestCase("", ExpectedResult = false)]
+        [TestCase("-", ExpectedResult = false)]
+        [TestCase("-123", ExpectedResult = true)]
         [TestCase("123", ExpectedResult = true)]
         [TestCase("Foo", ExpectedResult = false)]
         [TestCase("123Foo123", ExpectedResult = false)]
