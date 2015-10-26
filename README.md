@@ -10,4 +10,4 @@ Some/most of the initial validation code is taken directly from [https://github.
 
 ## Branches
 
-All development and pull requests should all be made against ``dev``.
+All development and pull requests should all be made against ``develop``.
