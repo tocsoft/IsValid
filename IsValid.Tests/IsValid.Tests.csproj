@@ -54,6 +54,7 @@
     <Compile Include="String\IsMobilePhone.cs" />
     <Compile Include="String\IsNumeric.cs" />
     <Compile Include="String\IsUppercase.cs" />
+    <Compile Include="String\IsIsbn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
