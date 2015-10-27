@@ -9,8 +9,6 @@
         <projectUrl>https://github.com/tocsoft/IsValid</projectUrl>
         <licenseUrl>https://github.com/tocsoft/IsValid/blob/master/LICENCE.md</licenseUrl>
         <tags>Validation MobilePhone CreditCard Validate</tags>
+        <iconUrl>http://tocsoft.github.io/IsValid/icon.png</iconUrl>
     </metadata>
-    <files>
-        <file src="..\icon.png" target="" />
-    </files>
 </package>
