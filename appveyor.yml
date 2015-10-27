@@ -1,0 +1,17 @@
+install:
+  - choco install gitversion.portable -pre -y
+
+assembly_info:
+  patch: false
+
+before_build:
+  - nuget restore
+  - ps: gitversion /l console /output buildserver
+
+build:
+  cmd: build.cmd
+
+#after_build:
+#  - cmd: ECHO nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+#  - cmd: nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+#  - cmd: appveyor PushArtifact "IsValid.%GitVersion_NuGetVersion%.nupkg"

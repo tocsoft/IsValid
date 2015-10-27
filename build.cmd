@@ -10,6 +10,12 @@ set version=
 if not "%PackageVersion%" == "" (
    set version=-Version %PackageVersion%
 )
+if not "%GitVersion_NuGetVersion%" == "" (
+	if "%version%" == "" (
+		set version=-Version %GitVersion_NuGetVersion%
+	)
+)
+
 
 if "%nuget%" == "" (  
   set nuget=nuget.exe

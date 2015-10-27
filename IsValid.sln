@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsValid.Tests", "IsValid.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{E97FFC34-D344-412C-A2C5-AC6DD6D13617}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		build.cmd = build.cmd
 		icon.svg = icon.svg
 		LICENCE.md = LICENCE.md
