@@ -8,8 +8,8 @@ before_build:
   - nuget restore
   - ps: gitversion /l console /output buildserver
 
-build:
-  cmd: build.cmd
+build_script:
+  - cmd: build.cmd
 
 #after_build:
 #  - cmd: ECHO nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
