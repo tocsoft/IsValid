@@ -1,6 +1,8 @@
 install:
   - choco install gitversion.portable -pre -y
 
+nuget:
+  disable_publish_on_pr: true
 assembly_info:
   patch: false
 
@@ -13,3 +15,9 @@ build_script:
 
 after_build:
   - cmd: appveyor PushArtifact "Build\IsValid.%GitVersion_NuGetVersion%.nupkg"
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/tocsoft/api/v2/package
+  api_key:
+    secure: SyrSERGrjkK21TSCsHtqke5279SMxXCg2NXKjR2qaErP0khEplwxPwE8Ch5bxzyf
+  skip_symbols: true
