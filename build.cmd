@@ -30,14 +30,6 @@ ECHO Running MSBUILD
 REM Build
 "%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild" IsValid.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
-if not "%GallioEcho%" == "" (  
-
-  ECHO Running unit tests
-  REM Unit tests
-  "%GallioEcho%" IsValid\IsValid.Tests\bin\%config%\IsValid.Tests.dll
-  if not "%errorlevel%"=="0" goto failure
-)
-
 REM Package
 ECHO Building pacakges
 mkdir Build

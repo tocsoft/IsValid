@@ -11,11 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{E97FFC34
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		build.cmd = build.cmd
+		GitVersionConfig.yaml = GitVersionConfig.yaml
 		icon.svg = icon.svg
 		LICENCE.md = LICENCE.md
-		pre-build.cmd = pre-build.cmd
 		README.md = README.md
-		x_GitVersionConfig.yaml = x_GitVersionConfig.yaml
 	EndProjectSection
 EndProject
 Global
