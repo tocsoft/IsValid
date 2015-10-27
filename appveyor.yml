@@ -11,7 +11,7 @@ before_build:
 build_script:
   - cmd: build.cmd
 
-#after_build:
-#  - cmd: ECHO nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-#  - cmd: nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-#  - cmd: appveyor PushArtifact "IsValid.%GitVersion_NuGetVersion%.nupkg"
+after_build:
+  - cmd: ECHO nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack IsValid\IsValid.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "IsValid.%GitVersion_NuGetVersion%.nupkg"
