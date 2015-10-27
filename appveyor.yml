@@ -21,3 +21,5 @@ deploy:
   api_key:
     secure: SyrSERGrjkK21TSCsHtqke5279SMxXCg2NXKjR2qaErP0khEplwxPwE8Ch5bxzyf
   skip_symbols: true
+  on:
+    branch: master
