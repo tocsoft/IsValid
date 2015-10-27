@@ -1,4 +1,4 @@
-[![tocsoft MyGet Build Status](https://www.myget.org/BuildSource/Badge/tocsoft?identifier=da851231-8a12-4239-8d22-30b4d7f9dc8f)](https://www.myget.org/)
+[![Build status](https://ci.appveyor.com/api/projects/status/45tp8madidw0ml9x/branch/master?svg=true)](https://ci.appveyor.com/project/tocsoft/isvalid/branch/master)
 
 IsValid is a library for validating values against different specifications, which includes things like mobile phone numbers from various locales, credit card numbers, IP addresses etc.
 
