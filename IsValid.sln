@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsValid", "IsValid\IsValid.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsValid.Tests", "IsValid.Tests\IsValid.Tests.csproj", "{2357804E-6486-49F3-9234-641D68BE6B9D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{E97FFC34-D344-412C-A2C5-AC6DD6D13617}"
+	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		GitVersionConfig.yaml = GitVersionConfig.yaml
+		icon.svg = icon.svg
+		LICENCE.md = LICENCE.md
+		pre-build.cmd = pre-build.cmd
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
