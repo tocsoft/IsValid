@@ -206,12 +206,12 @@ namespace IsValid.Tests.String
         public bool IsMobilePhoneTestPassingLocaleOnThread(string number, string locale)
         {
 
-            var tst = new tmp()
+            var tst = new tmp
             {
                 phone = number,
                 locale = locale
             };
-            Thread t = new Thread(new ParameterizedThreadStart(ThreadExecute));
+            var t = new Thread(new ParameterizedThreadStart(ThreadExecute));
             t.Start(tst);
 
             t.Join();
