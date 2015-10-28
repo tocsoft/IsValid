@@ -86,7 +86,6 @@ namespace IsValid.Tests.String
 
         [Test]
         [TestCaseSource("NotIPv4")]
-        [TestCaseSource("IPv6")]
         public void IsNotIPv4(string value)
         {
             Assert.IsFalse(value.IsValid().IPAddressV4());
@@ -94,7 +93,6 @@ namespace IsValid.Tests.String
 
         [Test]
         [TestCaseSource("NotIPv4")]
-        [TestCaseSource("IPv6")]
         public void IsNotIPv4ViaFamily(string value)
         {
             Assert.IsFalse(value.IsValid().IPAddress(AddressFamily.InterNetwork));
@@ -115,7 +113,6 @@ namespace IsValid.Tests.String
 
         [Test]
         [TestCaseSource("NotIPv6")]
-        [TestCaseSource("IPv4")]
         public void IsNotIPv6(string value)
         {
             Assert.IsFalse(value.IsValid().IPAddressV6());
@@ -123,7 +120,6 @@ namespace IsValid.Tests.String
 
         [Test]
         [TestCaseSource("NotIPv6")]
-        [TestCaseSource("IPv4")]
         public void IsNotIPv6ViaFamily(string value)
         {
             Assert.IsFalse(value.IsValid().IPAddress(AddressFamily.InterNetworkV6));
