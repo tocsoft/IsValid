@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,7 +56,7 @@
      id="layer1"
      transform="translate(0,-988.36218)">
     <path
-       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#112115;fill-opacity:1;stroke:#d6d6d6;stroke-width:0.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#0b100c;fill-opacity:1;stroke:none;stroke-width:0.50000000000000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="M 61.84375 0.25 C 61.7588 0.2979 61.678784 0.38909 61.59375 0.4375 C 57.532989 2.7494797 53.390414 5.6362826 49.21875 8.96875 C 48.235906 8.677523 47.200463 8.5 46.125 8.5 L 14.0625 8.5 C 8.0360059 8.5 3.125 13.411 3.125 19.4375 L 3.125 34.6875 L 2.1875 34.15625 L 0.375 36.34375 L 3.125 39.53125 L 3.125 51.5 C 3.125 57.5265 8.0360238 62.4375 14.0625 62.4375 L 46.125 62.4375 C 52.151473 62.4375 57.0625 57.5265 57.0625 51.5 L 57.0625 19.4375 C 57.0625 16.510744 55.881813 13.872078 54 11.90625 C 56.973086 8.774801 60.134761 5.6670233 63.53125 2.59375 L 61.84375 0.25 z M 14.0625 12.3125 L 45.15625 12.3125 C 35.717548 20.516381 26.297095 31.019491 17.71875 42.9375 L 6.96875 36.875 L 6.96875 19.4375 C 6.96875 15.4686 10.093726 12.3125 14.0625 12.3125 z M 51.4375 14.65625 C 52.570469 15.91548 53.25 17.588586 53.25 19.4375 L 53.25 51.5 C 53.25 55.4689 50.093787 58.59375 46.125 58.59375 L 22.28125 58.59375 C 29.910405 43.052266 38.838442 28.535491 51.4375 14.65625 z M 6.96875 44 L 19.5625 58.59375 L 14.0625 58.59375 C 10.093708 58.59375 6.96875 55.4689 6.96875 51.5 L 6.96875 44 z "
        transform="translate(0,988.36218)"
        id="path3802" />
