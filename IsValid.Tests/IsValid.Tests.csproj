@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="sysglobl" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IValidateableTests.cs" />
+    <Compile Include="Object\IsValidModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String\IsCreditCard.cs" />
     <Compile Include="String\IsEmail.cs" />
