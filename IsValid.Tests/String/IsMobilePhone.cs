@@ -198,14 +198,13 @@ namespace IsValid.Tests.String
         [TestCaseSource("TestCases")]
         public bool IsMobilePhoneTestPassingLocale(string number, string locale)
         {
-            return number.IsValid().MobilePhone(locale);
+            return number.IsValid(locale).MobilePhone();
         }
 
         [Test]
         [TestCaseSource("TestCases")]
         public bool IsMobilePhoneTestPassingLocaleOnThread(string number, string locale)
         {
-
             var tst = new tmp
             {
                 phone = number,
@@ -230,7 +229,7 @@ namespace IsValid.Tests.String
             catch (CultureNotFoundException ex)
             {
                 //this is so the test cases still pass even when we are dealing with a Culture that .net/windows doesn't understand
-                t.result = t.phone.IsValid().MobilePhone(t.locale);
+                t.result = t.phone.IsValid(t.locale).MobilePhone();
             }
         }
 

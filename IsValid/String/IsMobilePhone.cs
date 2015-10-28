@@ -27,17 +27,8 @@ namespace IsValid
             { "nb-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
             { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) }
         };
-
-        /// <summary>
-        /// Determines whether the given phone number is a mobile phone number or not.
-        /// </summary>
-        /// <param name="phoneNumber">The phone number to check.</param>
-        /// <param name="locale">The locale to look in.</param>
-        /// <returns>True if it is a mobile phone number, false otherwise.</returns>
-        /// <remarks>
-        /// Relies on locales that use specific blocks of numbers for mobile phone numbers.
-        /// </remarks>
-        public static bool MobilePhone(this IValidatableValue<string> phoneNumber, string locale)
+        
+        private static bool MobilePhone(this IValidatableValue<string> phoneNumber, string locale)
         {
             if (!phoneNumber.IsValueSet || string.IsNullOrWhiteSpace(phoneNumber.Value))
             {
@@ -62,7 +53,7 @@ namespace IsValid
         /// </remarks>
         public static bool MobilePhone(this IValidatableValue<string> phoneNumber)
         {
-            return phoneNumber.MobilePhone(Thread.CurrentThread.CurrentUICulture.Name);
+            return phoneNumber.Locale.Any(x => phoneNumber.MobilePhone(x));
         }
     }
 }
