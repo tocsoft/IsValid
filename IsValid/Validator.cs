@@ -18,5 +18,15 @@ namespace IsValid
         {
             return value.IsValid((string[])null);
         }
+        
+        public static IValidatableValue<object> IsValid(this object value, params string[] locale)
+        {
+            return new ValidatableValue<object>(value, locale);
+        }
+
+        public static IValidatableValue<object> IsValid(this object value)
+        {
+            return value.IsValid((string[])null);
+        }
     }
 }
