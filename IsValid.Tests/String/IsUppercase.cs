@@ -15,16 +15,16 @@ namespace IsValid.Tests.String
     {
 
         [Test]
-        [TestCase(null,true)]
-        [TestCase("foo",false)]
-        [TestCase("FOO",true)]
-        [TestCase("123",true)]
-        [TestCase("foo123",false)]
-        [TestCase("FOO123",true)]
-        [TestCase("Foo123",false)]
-        public bool IsUppercaseTest(string value)
+        [TestCase(null, true)]
+        [TestCase("foo", false)]
+        [TestCase("FOO", true)]
+        [TestCase("123", true)]
+        [TestCase("foo123", false)]
+        [TestCase("FOO123", true)]
+        [TestCase("Foo123", false)]
+        public void IsUppercaseTest(string value, bool expected)
         {
-            return value.IsValid().Uppercase();
+            Assert.AreEqual(expected, value.IsValid().Uppercase());
         }
     }
 }
