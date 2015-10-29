@@ -17,16 +17,24 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool Email(this IValidatableValue<string> input)
+        public static bool Email(this ValidatableValue<string> input)
         {
             try
             {
-                return new MailAddress(input.Value).Address == input.Value;
+                if (new MailAddress(input.Value).Address != input.Value)
+                {
+                    input.AddError("Input doesn't match address part");
+                }
+
+                return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                input.AddError(ex.Message);
             }
+
+
+            return false;
         }
 
     }

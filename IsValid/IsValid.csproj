@@ -54,7 +54,6 @@
     <Compile Include="String\IsIsbn.cs" />
     <Compile Include="String\IsUppercase.cs" />
     <Compile Include="Validator.cs" />
-    <Compile Include="IValidatableValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatableValue.cs" />
   </ItemGroup>

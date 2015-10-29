@@ -9,22 +9,22 @@ namespace IsValid
 {
     public static class Validator
     {
-        public static IValidatableValue<string> IsValid(this string value, params string[] locale)
+        public static ValidatableValue<string> IsValid(this string value, params string[] locale)
         {
             return new ValidatableValue<string>(value, locale);
         }
 
-        public static IValidatableValue<string> IsValid(this string value)
+        public static ValidatableValue<string> IsValid(this string value)
         {
             return value.IsValid((string[])null);
         }
         
-        public static IValidatableValue<object> IsValid(this object value, params string[] locale)
+        public static ValidatableValue<object> IsValid(this object value, params string[] locale)
         {
             return new ValidatableValue<object>(value, locale);
         }
 
-        public static IValidatableValue<object> IsValid(this object value)
+        public static ValidatableValue<object> IsValid(this object value)
         {
             return value.IsValid((string[])null);
         }

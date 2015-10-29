@@ -17,16 +17,18 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool Numeric(this IValidatableValue<string> inputValue)
+        public static bool Numeric(this ValidatableValue<string> inputValue)
         {
             var input = inputValue.Value;
             if (input == null)
             {
+                inputValue.AddError("Null value");
                 return false;
             }
             int length = input.Length;
             if (length == 0)
             {
+                inputValue.AddError("No characters");
                 return false;
             }
             int i = 0;
@@ -34,6 +36,7 @@ namespace IsValid
             {
                 if (length == 1)
                 {
+                    inputValue.AddError("Contains only '-'");
                     return false;
                 }
                 i = 1;
@@ -43,9 +46,11 @@ namespace IsValid
                 char c = input[i];
                 if (c <= '/' || c >= ':')
                 {
+                    inputValue.AddError("Contains out of range character");
                     return false;
                 }
             }
+
             return true;
         }
 
