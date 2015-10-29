@@ -15,15 +15,19 @@ namespace IsValid.Tests.String
     {
 
         [Test]
-        [TestCase("foo@bar.com", ExpectedResult = true)]
-        [TestCase("foo@bar.com.au", ExpectedResult = true)]
-        [TestCase("foo+bar@bar.com", ExpectedResult = true)]
-        [TestCase("invalidemail@", ExpectedResult = false)]
-        [TestCase("invalid.com", ExpectedResult = false)]
-        [TestCase("@invalid.com", ExpectedResult = false)]
-        public bool TestEmail(string value)
+        [TestCase("foo@bar.com", true)]
+        [TestCase("foo@bar.com.au", true)]
+        [TestCase("foo+bar@bar.com", true)]
+        [TestCase("invalidemail@", false)]
+        [TestCase("invalid.com", false)]
+        [TestCase("@invalid.com", false)]
+        public void TestEmail(string value, bool expected)
         {
-            return value.IsValid().Email();
+            var v = value.IsValid();
+            var r = v.Email();
+
+            Assert.AreEqual(expected, r);
+            Assert.AreEqual(expected ? 0 : 1, v.Errors.Count());
         }
     }
 }

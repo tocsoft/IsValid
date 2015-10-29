@@ -16,6 +16,7 @@ if not "%GitVersion_NuGetVersion%" == "" (
 	)
 )
 
+set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
 if "%nuget%" == "" (  
   set nuget=nuget.exe
@@ -28,7 +29,7 @@ if not "%errorlevel%"=="0" goto failure
 
 ECHO Running MSBUILD
 REM Build
-"%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild" IsValid.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+msbuild IsValid.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
 
 REM Package
 ECHO Building pacakges
@@ -39,12 +40,12 @@ if not "%errorlevel%"=="0" goto failure
 
 :success
 ECHO successfully built project
-exit 0
+REM exit 0
 goto end
 
 :failure
 ECHO failed to build.
-exit -1
+REM exit -1
 goto end
 
 :end

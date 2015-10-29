@@ -24,17 +24,29 @@ namespace IsValid
         /// <param name="version">Valid options are: IsbnVersion.Ten, IsbnVersion.Thirteen or IsbnVersion.Any</param>
         /// <returns></returns>
         /// IsbnVersion
-        public static bool Isbn(this IValidatableValue<string> inputVal, IsbnVersion version = IsbnVersion.Any)
+        public static bool Isbn(this ValidatableValue<string> inputVal, IsbnVersion version = IsbnVersion.Any)
         {
             var input = RemoveSpacesAndHyphens(inputVal.Value);
             switch (version)
             {
                 case IsbnVersion.Any:
-                    return IsIsbn10(input) || IsIsbn13(input);
+                    if (!IsIsbn10(input) && !IsIsbn13(input))
+                    {
+                        inputVal.AddError("Not ISBN 10 or 13");
+                    }
+                    return inputVal.IsValid;
                 case IsbnVersion.Thirteen:
-                    return IsIsbn13(input);
+                    if (!IsIsbn13(input))
+                    {
+                        inputVal.AddError("Not ISBN 13");
+                    }
+                    return inputVal.IsValid;
                 case IsbnVersion.Ten:
-                    return IsIsbn10(input);
+                    if (!IsIsbn10(input))
+                    {
+                        inputVal.AddError("Not ISBN 10");
+                    }
+                    return inputVal.IsValid;
             }
             throw new ArgumentOutOfRangeException(
                 "version",

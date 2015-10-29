@@ -15,7 +15,7 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool Uppercase(this IValidatableValue<string> input)
+        public static bool Uppercase(this ValidatableValue<string> input)
         {
             if (!input.IsValueSet || input.Value == null)
             {
@@ -23,7 +23,12 @@ namespace IsValid
             }
 
             var val = input.Value;
-            return val == val.ToUpper();
+            if (val != val.ToUpper())
+            {
+                input.AddError("Contains lowercase characters");
+            }
+
+            return input.IsValid;
         }
     }
 }

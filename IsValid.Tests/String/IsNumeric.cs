@@ -15,16 +15,16 @@ namespace IsValid.Tests.String
     {
 
         [Test]
-        [TestCase(null, ExpectedResult = false)]
-        [TestCase("", ExpectedResult = false)]
-        [TestCase("-", ExpectedResult = false)]
-        [TestCase("-123", ExpectedResult = true)]
-        [TestCase("123", ExpectedResult = true)]
-        [TestCase("Foo", ExpectedResult = false)]
-        [TestCase("123Foo123", ExpectedResult = false)]
-        public bool IsNumericTest(string value)
+        [TestCase(null, false)]
+        [TestCase("", false)]
+        [TestCase("-", false)]
+        [TestCase("-123", true)]
+        [TestCase("123", true)]
+        [TestCase("Foo", false)]
+        [TestCase("123Foo123", false)]
+        public void IsNumericTest(string value, bool expected)
         {
-            return value.IsValid().Numeric();
+            Assert.AreEqual(expected, value.IsValid().Numeric());
         }
     }
 }

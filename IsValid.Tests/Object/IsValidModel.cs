@@ -11,47 +11,70 @@ namespace IsValid.Tests.Object
     public class IsValidModel
     {
         [Test]
+        public void ValidationMessagesSet()
+        {
+            var validatable = new temp
+            {
+                RequiredString = null,
+                Range = 0
+            }
+            .IsValid();
+
+            var r = validatable.Model();
+
+            Assert.IsFalse(r);
+
+            Assert.AreEqual(2, validatable.Errors.Count());
+        }
+
+        [Test]
         public void ExecuteRequiredStringValidatorIsValid()
         {
 
-            var r = new temp
+            var v = new temp
             {
                 RequiredString = "string",
                 Range = 50
             }
-            .IsValid()
-            .Model();
+            .IsValid();
+            var r = v.Model();
 
             Assert.IsTrue(r);
+            Assert.IsTrue(v.IsValid);
+            Assert.AreEqual(0, v.Errors.Count());
         }
 
         [Test]
         public void ExecuteRequiredStringValidator()
         {
-            var r = new temp
+            var v = new temp
             {
                 RequiredString = null,
                 Range = 50
             }
-            .IsValid()
-            .Model();
+            .IsValid();
+            var r = v.Model();
 
             Assert.IsFalse(r);
+            Assert.IsFalse(v.IsValid);
+            Assert.AreEqual(1, v.Errors.Count());
         }
 
         [Test]
         public void RangeInvalid()
         {
-            var r = new temp
+            var v = new temp
             {
                 RequiredString = "str",
                 Range = 1
             }
-            .IsValid()
-            .Model();
+            .IsValid();
+            var r = v.Model();
 
-            Assert.IsFalse(r);
+            Assert.IsFalse(v.IsValid);
+            Assert.AreEqual(1, v.Errors.Count());
         }
+
 
         public class temp
         {

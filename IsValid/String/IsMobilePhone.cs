@@ -27,8 +27,8 @@ namespace IsValid
             { "nb-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
             { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) }
         };
-        
-        private static bool MobilePhone(this IValidatableValue<string> phoneNumber, string locale)
+
+        private static bool MobilePhone(this ValidatableValue<string> phoneNumber, string locale)
         {
             if (!phoneNumber.IsValueSet || string.IsNullOrWhiteSpace(phoneNumber.Value))
             {
@@ -51,9 +51,13 @@ namespace IsValid
         /// <remarks>
         /// Relies on locales that use specific blocks of numbers for mobile phone numbers.
         /// </remarks>
-        public static bool MobilePhone(this IValidatableValue<string> phoneNumber)
+        public static bool MobilePhone(this ValidatableValue<string> phoneNumber)
         {
-            return phoneNumber.Locale.Any(x => phoneNumber.MobilePhone(x));
+            if (!phoneNumber.Locale.Any(x => phoneNumber.MobilePhone(x)))
+            {
+                phoneNumber.AddError("Not a recognised mobile phone number");
+            }
+            return phoneNumber.IsValid;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool IPAddressV4(this IValidatableValue<string> input)
+        public static bool IPAddressV4(this ValidatableValue<string> input)
         {
             return input.IPAddress(System.Net.Sockets.AddressFamily.InterNetwork);
         }
@@ -26,7 +26,7 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool IPAddressV6(this IValidatableValue<string> input)
+        public static bool IPAddressV6(this ValidatableValue<string> input)
         {
             return input.IPAddress(System.Net.Sockets.AddressFamily.InterNetworkV6);
         }
@@ -36,18 +36,28 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool IPAddress(this IValidatableValue<string> input, params System.Net.Sockets.AddressFamily[] family)
+        public static bool IPAddress(this ValidatableValue<string> input, params System.Net.Sockets.AddressFamily[] family)
         {
 
             if (family == null || !family.Any())
             {
+                input.AddError("No AddressFamily specified");
                 return false;
             }
 
             IPAddress address;
             if (System.Net.IPAddress.TryParse(input.Value, out address))
             {
-                return family.Contains(address.AddressFamily);
+                if (family.Contains(address.AddressFamily))
+                {
+                    return true;
+                }
+
+                input.AddError("AddressFamily doesn't match");
+            }
+            else
+            {
+                input.AddError("Failed to parse IP address");
             }
 
             return false;
@@ -58,7 +68,7 @@ namespace IsValid
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static bool IPAddress(this IValidatableValue<string> input)
+        public static bool IPAddress(this ValidatableValue<string> input)
         {
             return input.IPAddress(System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.AddressFamily.InterNetworkV6);
         }

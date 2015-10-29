@@ -9,7 +9,7 @@ namespace IsValid
 {
     public static class IsValidModel
     {
-        public static bool Model(this IValidatableValue<object> input)
+        public static bool Model(this ValidatableValue<object> input)
         {
             if (input.Value == null)
             {
@@ -21,7 +21,9 @@ namespace IsValid
             var results = new List<ValidationResult>();
             System.ComponentModel.DataAnnotations.Validator.TryValidateObject(input.Value, context, results, true);
 
-            return !results.Any();
+            input.AddError(results);
+
+            return input.IsValid;
         }
     }
 }
