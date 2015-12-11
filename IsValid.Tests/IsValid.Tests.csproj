@@ -52,7 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="String\IsCreditCard.cs" />
     <Compile Include="String\IsEmail.cs" />
+    <Compile Include="String\IsBusinessIdentifierCode.cs" />
     <Compile Include="String\IsIPAddress.cs" />
+    <Compile Include="String\IsIban.cs" />
     <Compile Include="String\IsLowercase.cs" />
     <Compile Include="String\IsMobilePhone.cs" />
     <Compile Include="String\IsNumeric.cs" />
