@@ -11,91 +11,78 @@ namespace IsValid
     //information was sourced from https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN
     public static class IsIban
     {
-        static Dictionary<string, int> _countryValidationLength = new Dictionary<string, int>()
+        //https://en.wikipedia.org/wiki/International_Bank_Account_Number#Algorithms
+        static List<CountryValidation> _countryValidationLength = new List<CountryValidation>()
         {
-            {"AL", 28},
-            {"AD", 24},
-            {"AT", 20},
-            {"AZ", 28},
-            {"BH", 22},
-            {"BE", 16},
-            {"BA", 20},
-            {"BR", 29},
-            {"BG", 22},
-            {"CR", 21},
-            {"HR", 21},
-            {"CY", 28},
-            {"CZ", 24},
-            {"DK", 18},
-            {"DO", 28},
-            {"TL", 23},
-            {"EE", 20},
-            {"FO", 18},
-            {"FI", 18},
-            {"FR", 27},
-            {"GE", 22},
-            {"DE", 22},
-            {"GI", 23},
-            {"GR", 27},
-            {"GL", 18},
-            {"GT", 28},
-            {"HU", 28},
-            {"IS", 26},
-            {"IE", 22},
-            {"IL", 23},
-            {"IT", 27},
-            {"JO", 30},
-            {"KZ", 20},
-            {"XK", 20},
-            {"KW", 30},
-            {"LV", 21},
-            {"LB", 28},
-            {"LI", 21},
-            {"LT", 20},
-            {"LU", 20},
-            {"MK", 19},
-            {"MT", 31},
-            {"MR", 27},
-            {"MU", 30},
-            {"MC", 27},
-            {"MD", 24},
-            {"ME", 22},
-            {"NL", 18},
-            {"NO", 15},
-            {"PK", 24},
-            {"PS", 29},
-            {"PL", 28},
-            {"PT", 25},
-            {"QA", 29},
-            {"RO", 24},
-            {"SM", 27},
-            {"SA", 24},
-            {"RS", 22},
-            {"SK", 24},
-            {"SI", 19},
-            {"ES", 24},
-            {"SE", 24},
-            {"CH", 21},
-            {"TN", 24},
-            {"TR", 26},
-            {"AE", 23},
-            {"GB", 22},
-            {"VG", 24},
+new CountryValidation("GBkk bbbb ssss sscc cccc cc", "en-GB"),
+            new CountryValidation("ALkk bbbs sssx cccc cccc cccc cccc"),
+new CountryValidation("ADkk bbbb ssss cccc cccc cccc"),
+new CountryValidation("ATkk bbbb bccc cccc cccc"),
+new CountryValidation("AZkk bbbb cccc cccc cccc cccc cccc"),
+new CountryValidation("BHkk bbbb cccc cccc cccc cc"),
+new CountryValidation("BEkk bbbc cccc ccxx"),
+new CountryValidation("BAkk bbbs sscc cccc ccxx"),
+new CountryValidation("BRkk bbbb bbbb ssss sccc cccc ccct n"),
+new CountryValidation("BGkk bbbb ssss ddcc cccc cc"),
+new CountryValidation("CRkk bbbc cccc cccc cccc c"),
+new CountryValidation("HRkk bbbb bbbc cccc cccc c"),
+new CountryValidation("CYkk bbbs ssss cccc cccc cccc cccc"),
+new CountryValidation("CZkk bbbb ssss sscc cccc cccc"),
+new CountryValidation("DKkk bbbb cccc cccc cc"),
+new CountryValidation("DOkk bbbb cccc cccc cccc cccc cccc"),
+new CountryValidation("TLkk bbbc cccc cccc cccc cxx"),
+new CountryValidation("EEkk bbss cccc cccc cccx"),
+new CountryValidation("FOkk bbbb cccc cccc cx"),
+new CountryValidation("FIkk bbbb bbcc cccc cx"),
+new CountryValidation("FRkk bbbb bggg ggcc cccc cccc cxx"),
+new CountryValidation("GEkk bbcc cccc cccc cccc cc"),
+new CountryValidation("DEkk bbbb bbbb cccc cccc cc"),
+new CountryValidation("GIkk bbbb cccc cccc cccc ccc"),
+new CountryValidation("GRkk bbbs sssc cccc cccc cccc ccc"),
+new CountryValidation("GLkk bbbb cccc cccc cc"),
+new CountryValidation("GTkk bbbb mmtt cccc cccc cccc cccc"),
+new CountryValidation("HUkk bbbs sssk cccc cccc cccc cccx"),
+new CountryValidation("ISkk bbbb sscc cccc iiii iiii ii"),
+new CountryValidation("IEkk aaaa bbbb bbcc cccc cc"),
+new CountryValidation("ILkk bbbn nncc cccc cccc ccc"),
+new CountryValidation("ITkk xaaa aabb bbbc cccc cccc ccc"),
+new CountryValidation("JOkk bbbb nnnn cccc cccc cccc cccc cc"),
+new CountryValidation("KZkk bbbc cccc cccc cccc"),
+new CountryValidation("XKkk bbbb cccc cccc cccc"),
+new CountryValidation("KWkk bbbb cccc cccc cccc cccc cccc cc"),
+new CountryValidation("LVkk bbbb cccc cccc cccc c"),
+new CountryValidation("LBkk bbbb cccc cccc cccc cccc cccc"),
+new CountryValidation("LIkk bbbb bccc cccc cccc c"),
+new CountryValidation("LTkk bbbb bccc cccc cccc"),
+new CountryValidation("LUkk bbbc cccc cccc cccc"),
+new CountryValidation("MKkk bbbc cccc cccc cxx"),
+new CountryValidation("MTkk bbbb ssss sccc cccc cccc cccc ccc"),
+new CountryValidation("MRkk bbbb bsss sscc cccc cccc cxx"),
+new CountryValidation("MUkk bbbb bbss cccc cccc cccc 000d dd"),
+new CountryValidation("MDkk bbcc cccc cccc cccc cccc"),
+new CountryValidation("MCkk bbbb bsss sscc cccc cccc cxx"),
+new CountryValidation("MEkk bbbc cccc cccc cccc xx"),
+new CountryValidation("NLkk bbbb cccc cccc cc"),
+new CountryValidation("NOkk bbbb cccc ccx"),
+new CountryValidation("PKkk bbbb cccc cccc cccc cccc"),
+new CountryValidation("PSkk bbbb xxxx xxxx xccc cccc cccc c"),
+new CountryValidation("PLkk bbbs sssx cccc cccc cccc cccc"),
+new CountryValidation("PTkk bbbb ssss cccc cccc cccx x"),
+new CountryValidation("QAkk bbbb cccc cccc cccc cccc cccc c"),
+new CountryValidation("ROkk bbbb cccc cccc cccc cccc"),
+new CountryValidation("SMkk xaaa aabb bbbc cccc cccc ccc"),
+new CountryValidation("SAkk bbcc cccc cccc cccc cccc"),
+new CountryValidation("RSkk bbbc cccc cccc cccc xx"),
+new CountryValidation("SKkk bbbb ssss sscc cccc cccc"),
+new CountryValidation("SIkk bbss sccc cccc cxx"),
+new CountryValidation("ESkk bbbb gggg xxcc cccc cccc"),
+new CountryValidation("SEkk bbbc cccc cccc cccc cccc"),
+new CountryValidation("CHkk bbbb bccc cccc cccc c"),
+new CountryValidation("TNkk bbss sccc cccc cccc cccc"),
+new CountryValidation("TRkk bbbb bxcc cccc cccc cccc cc"),
+new CountryValidation("AEkk bbbc cccc cccc cccc ccc"),
+new CountryValidation("VGkk bbbb cccc cccc cccc cccc"),
 
-            {"DZ", 24},
-            {"AO", 25},
-            {"BJ", 28},
-            {"BF", 27},
-            {"BI", 16},
-            {"CM", 27},
-            {"CV", 25},
-            {"IR", 26},
-            {"CI", 28},
-            {"MG", 27},
-            {"ML", 28},
-            {"MZ", 25},
-            {"SN", 28},
-            {"UA", 29},
         };
 
         /// <summary>
@@ -107,58 +94,130 @@ namespace IsValid
         /// IsbnVersion
         public static bool Iban(this ValidatableValue<string> inputVal)
         {
-            StringBuilder sb = new StringBuilder();
-            var val = inputVal.Value;
+            var val = inputVal.Value.ToUpper();
             var countryCode = val.Trim().Substring(0, 2);
 
-            if (!_countryValidationLength.ContainsKey(countryCode))
+            var validator = _countryValidationLength.Where(x => x.CountryCode == countryCode).FirstOrDefault();
+            if (validator == null)
             {
                 inputVal.AddError("Unrecognised country code");
                 return false;
             }
 
-            var charCount = val.Count(x => Char.IsLetterOrDigit(x));
-            if (charCount != _countryValidationLength[countryCode])
+            return validator.Validate(inputVal);
+
+        }
+
+        private class CountryValidation
+        {
+            public CountryValidation(string code, string bankAccountLocal = null)
             {
-                inputVal.AddError("Invalid length");
-                return false;
+                var clean = code.Replace(" ", "").ToUpper();
+                CountryCode = clean.Substring(0, 2);
+                var sb = new StringBuilder();
+                sb.Append(CountryCode);
+                char current = '#';
+                int count = 0;
+                //sectionstart
+                for (var i = 2; i < clean.Length; i++)
+                {
+                    var next = clean[i];
+                    if (current != next)
+                    {
+                        //close old one
+                        if (current != '#')
+                        {
+                            sb.Append(")");
+                        }
+                        //open new one
+                        sb.Append($"(?<CG_{next}>");
+                        current = next;
+                    }
+                    sb.Append("\\S");
+                }
+                sb.Append(")");
+
+                LocaleCode = bankAccountLocal;
+                Length = clean.Length;
+                //lets convert pattern to regex
+
+                Pattern = new Regex(sb.ToString());
             }
 
-            for (var i = 0; i < val.Length; i++)
+            public string CountryCode { get; set; }
+            private string LocaleCode { get; set; }
+            private Regex Pattern { get; set; }
+            private int Length { get; set; }
+
+            internal bool Validate(ValidatableValue<string> inputVal)
             {
-                var c = val[i];
-                if (!Char.IsWhiteSpace(c))
+                var val = inputVal.Value.ToUpper();
+                var charCount = val.Count(x => Char.IsLetterOrDigit(x));
+                if (charCount != Length)
                 {
-                    if (Char.IsLetter(c))
+                    inputVal.AddError("Invalid length");
+                    return false;
+                }
+                StringBuilder sb = new StringBuilder();
+
+                for (var i = 0; i < val.Length; i++)
+                {
+                    var c = val[i];
+                    if (!Char.IsWhiteSpace(c))
                     {
-                        //letter
-                        var v = (Char.ToUpper(c) - 'A') + 10;
-                        sb.Append(v);
-                    }
-                    else if (Char.IsDigit(c))
-                    {
-                        sb.Append(c);
-                    }
-                    else
-                    {
-                        inputVal.AddError("Contains invalid character(s)");
-                        return false;
+                        if (Char.IsLetter(c))
+                        {
+                            //letter
+                            var v = (Char.ToUpper(c) - 'A') + 10;
+                            sb.Append(v);
+                        }
+                        else if (Char.IsDigit(c))
+                        {
+                            sb.Append(c);
+                        }
+                        else
+                        {
+                            inputVal.AddError("Contains invalid character(s)");
+                            return false;
+                        }
                     }
                 }
+
+                val = sb.ToString();
+                val = val.Substring(6) + val.Substring(0, 6);
+
+                var intVal = System.Numerics.BigInteger.Parse(val);
+
+                var remainder = System.Numerics.BigInteger.Remainder(intVal, new System.Numerics.BigInteger(97));
+                if (!remainder.IsOne)
+                {
+                    inputVal.AddError("Invalid check digit");
+                }
+
+                //lets try and validate the actual account details
+
+                if (!string.IsNullOrWhiteSpace(LocaleCode))
+                {
+                    val = inputVal.Value.ToUpper().Replace(" ", "");
+                    var m = Pattern.Match(val);
+                    string bankCode = null;
+                    if (m.Groups["CG_S"] != null)
+                    {
+                        bankCode = m.Groups["CG_S"].Value;//sort code
+                    }
+                    var accountNumber = m.Groups["CG_C"].Value;//account number
+                    var validator = accountNumber.IsValid(LocaleCode);
+                    if (!validator.BankAccount(bankCode))
+                    {
+                        foreach (var e in validator.Errors)
+                        {
+                            inputVal.AddError(e);
+                        }
+                }
+                }
+
+                return inputVal.IsValid;
             }
-
-            val = sb.ToString();
-            val = val.Substring(6) + val.Substring(0, 6);
-
-            var intVal = System.Numerics.BigInteger.Parse(val);
-
-            var remainder = System.Numerics.BigInteger.Remainder(intVal, new System.Numerics.BigInteger(97));
-            if (!remainder.IsOne)
-            {
-                inputVal.AddError("Invalid check digit");
-            }
-
-            return inputVal.IsValid;
         }
     }
 }

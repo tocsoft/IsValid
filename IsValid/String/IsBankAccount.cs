@@ -18,7 +18,10 @@ namespace IsValid
             LoadUKValidationRules("data.bank.uk.weightings.txt", "data.bank.uk.sortcode.txt");
         }
 
-
+        public static bool BankAccount(this ValidatableValue<string> inputV)
+        {
+            return inputV.BankAccount(null);
+        }
 
         /// <summary>
         /// Banks the account.

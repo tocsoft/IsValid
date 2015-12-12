@@ -81,6 +81,15 @@ namespace IsValid.Tests.String
             Assert.IsTrue(actual, validator.Errors.Select(x => x.ErrorMessage).FirstOrDefault());
         }
 
+        [TestCase("GB02 LOYD 0899 9966 3749 18")]
+        public void UKAcocuntNumberInvalid(string input)
+        {
+            var validator = input.IsValid();
+            var actual = validator.Iban();
+            var error = validator.Errors.Select(x => x.ErrorMessage).FirstOrDefault();
+            Assert.AreEqual("Invalid account details", error);
+        }
+
         [Test]
         //no country codes
         [TestCase("3423214121")]
