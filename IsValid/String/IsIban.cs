@@ -116,16 +116,18 @@ new CountryValidation("VGkk bbbb cccc cccc cccc cccc"),
                 CountryCode = clean.Substring(0, 2);
                 var sb = new StringBuilder();
                 sb.Append(CountryCode);
-                char current = '#';
-                int count = 0;
-                //sectionstart
-                for (var i = 2; i < clean.Length; i++)
+                sb.Append("\\d\\d");//check digit part always digits
+
+                const char initalPlaceholderChar = ' ';//inital char can never exist in iban pattern as we strip out all the spaces before we start
+                char current = initalPlaceholderChar;
+                //first 4 characters are the country and the checkdigit values
+                for (var i = 4; i < clean.Length; i++)
                 {
                     var next = clean[i];
                     if (current != next)
                     {
                         //close old one
-                        if (current != '#')
+                        if (current != initalPlaceholderChar)
                         {
                             sb.Append(")");
                         }
@@ -213,7 +215,7 @@ new CountryValidation("VGkk bbbb cccc cccc cccc cccc"),
                         {
                             inputVal.AddError(e);
                         }
-                }
+                    }
                 }
 
                 return inputVal.IsValid;
