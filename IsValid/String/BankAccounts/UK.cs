@@ -93,6 +93,18 @@ namespace IsValid
 
                 var firstTest = validator.First();
 
+                if (firstTest.Exception == 5)
+                {
+                    //for exception 5 we need to swap out the sortcode and start again
+                    if (SortCodeSubstitutions.ContainsKey(cleanedBranchNumber))
+                    {
+                        cleanedBranchNumber = SortCodeSubstitutions[cleanedBranchNumber];
+                        integerBracnhNumber = int.Parse(cleanedBranchNumber);
+                        combindAccountRef = cleanedBranchNumber + cleanedAccountNumber;
+                        validator = Validators.Where(x => x.CanValidate(integerBracnhNumber, combindAccountRef));
+                    }
+                }
+
                 if (firstTest.Calculate(combindAccountRef))
                 {
                     if (validator.Count() == 1 || new[] { 2, 9, 10, 11, 12, 13, 14 }.Contains(firstTest.Exception))
@@ -109,9 +121,17 @@ namespace IsValid
                 }
                 else
                 {
+                    var secondTest = validator.Skip(1).FirstOrDefault();
+                    if (firstTest.Exception == 2)
+                    {
+                        combindAccountRef = "309634" + cleanedAccountNumber;
+
+                        secondTest = Validators.Where(x => x.CanValidate(309634, combindAccountRef)).FirstOrDefault();
+                    }
+
                     if (new[] { 2, 9, 10, 11, 12, 13, 14 }.Contains(firstTest.Exception))
                     {
-                        if (validator.Skip(1).First().Calculate(combindAccountRef))
+                        if (secondTest.Calculate(combindAccountRef))
                         {
                             return;
                         }
@@ -129,6 +149,7 @@ namespace IsValid
             static object locker = new object();
 
             public static IEnumerable<Validator> Validators { get; private set; }
+            public static IDictionary<string, string> SortCodeSubstitutions { get; private set; }
 
             private static void Initilize()
             {
@@ -141,6 +162,11 @@ namespace IsValid
                     Validators = RawModulusWeightTable.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(x => new Validator(x)).ToList();
 
 
+                    SortCodeSubstitutions = RawSubstitutionData
+                                            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(x => x.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
+                                            .Where(x => x.Length == 2)
+                                            .ToDictionary(x => x[0], x => x[1]);
                     initalized = true;
                 }
             }
@@ -240,19 +266,54 @@ namespace IsValid
 
                 internal bool Calculate(string combinedCode)
                 {
-                    return calc(combinedCode, wightings);
+                    var local = wightings;
+                    var g = combinedCode[12];
+                    var h = combinedCode[13];
+                    var a = combinedCode[6];
+                    var b = combinedCode[7];
+
+                    if (Exception == 10)
+                    {
+                        if (b == '9' && g == '9' && (a == '0' || a == '9'))
+                        {
+                            local = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 }.Concat(local.Skip(8)).ToArray();
+                        }
+                    }
+
+
+                    if (Exception == 7 && g == '9')
+                    {
+                        local = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 }.Concat(local.Skip(8)).ToArray();
+                    }
+
+                    if (Exception == 2 || Exception == 9)
+                    {
+                        if (a != '0')
+                        {
+                            if (g != '9')
+                            {
+                                local = new int[] { 0, 0, 1, 2, 5, 3, 6, 4, 8, 7, 10, 9, 3, 1 };
+                            }
+                            else
+                            {
+                                local = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 8, 7, 10, 9, 3, 1 };
+                            }
+                        }
+                    }
+
+                    return calc(combinedCode, local);
                 }
 
                 internal bool DoubleAlternate(string combinedCode, int[] weightings)
                 {
-                    //if (Exception == 3)
-                    //{
-                    //    var c = combinedCode[8];
-                    //    if (c == '6' || c == '9')
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
+                    if (Exception == 3)
+                    {
+                        var c = combinedCode[8];
+                        if (c == '6' || c == '9')
+                        {
+                            return true;
+                        }
+                    }
 
                     int pos = 0;
                     for (var i = 0; i < combinedCode.Length; i++)
@@ -271,7 +332,24 @@ namespace IsValid
                         pos += 27;
                     }
 
-                    return pos % 10 == 0;
+                    var checkCalc = pos % 10;
+                    var target = 0;
+                    if (Exception == 5)
+                    {
+                        var h = combinedCode[13];
+                        target = h - '1' + 1;
+
+                        if (checkCalc == 0 && target == 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            checkCalc = 10 - checkCalc;
+                        }
+                    }
+
+                    return checkCalc == target;
                 }
 
                 internal bool StandardModulus10(string combinedCode, int[] weightings)
@@ -302,32 +380,7 @@ namespace IsValid
 
                 internal bool StandardModulus(string combinedCode, int mod, int[] weightings)
                 {
-                    var g = combinedCode[12];
-                    var h = combinedCode[13];
-                    var a = combinedCode[6];
 
-
-                    if (Exception == 7 && g == '9')
-                    {
-                        weightings = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 }.Concat(weightings.Skip(8)).ToArray();
-                    }
-
-                    //if (Exception == 2 || Exception == 9)
-                    //{
-                    //    var a = combinedCode[6];
-                    //    if (a == '0')
-                    //    {
-                    //        var g = combinedCode[12];
-                    //        if (g == '9')
-                    //        {
-                    //            weightings = new int[] { 0, 0, 1, 2, 5, 3, 6, 4, 8, 7, 10, 9, 3, 1 };
-                    //        }
-                    //        else
-                    //        {
-                    //            weightings = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 8, 7, 10, 9, 3, 1 };
-                    //        }
-                    //    }
-                    //}
 
                     int pos = 0;
                     for (var i = 0; i < combinedCode.Length; i++)
@@ -338,13 +391,33 @@ namespace IsValid
                     }
 
                     var target = 0;
+                    var chekCalc = pos % mod;
 
-                    //if (Exception == 5)
-                    //{
-                    //    target = int.Parse(combinedCode.Substring(combinedCode.Length - 2, 2));
-                    //}
+                    if (Exception == 4)
+                    {
+                        target = int.Parse(combinedCode.Substring(combinedCode.Length - 2, 2));
+                    }
 
-                    return pos % mod == target;
+                    if (Exception == 5)
+                    {
+                        var g = combinedCode[12];
+                        target = g - '1' + 1;
+
+                        if (chekCalc == 0 && g == '0')
+                        {
+                            return true;
+                        }
+                        else if (chekCalc == 1)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            chekCalc = 11 - chekCalc;
+                        }
+                    }
+
+                    return chekCalc == target;
                 }
             }
         }

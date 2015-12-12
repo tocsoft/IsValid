@@ -16,23 +16,23 @@ namespace IsValid.Tests.String
     {
 
         [Test]
-        [TestCase("202959", "63748472", true, "Pass modulus 11 and double alternate checks.")]
-        [TestCase("871427", "46238510", true, "Exception 10 & 11 where first check passes and second check fails.")]
-        [TestCase("872427", "46238510", true, "Exception 10 & 11 where first check fails and second check passes.")]
-        [TestCase("871427", "09123496", true, "Exception 10 where in the account number ab=09 and the g=9. The first check passes and second check fails.")]
-        [TestCase("871427", "99123496", true, "Exception 10 where in the account number ab=99 and the g=9. The first check passes and the second check fails.")]
-        [TestCase("820000", "73688637", true, "Exception 3, and the sorting code is the start of a range. As c=6 the second check should be ignored.")]
-        [TestCase("827999", "73988638", true, "Exception 3, and the sorting code is the end of a range. As c=9 the second check should be ignored.")]
-        [TestCase("827101", "28748352", true, "Exception 3. As c<>6 or 9 perform both checks pass.")]
-        [TestCase("134020", "63849203", true, "Exception 4 where the remainder is equal to the checkdigit.")]
-        [TestCase("118765", "64371389", true, "Exception 1 – ensures that 27 has been added to the accumulated total and passes double alternate modulus check.")]
-        [TestCase("200915", "41011166", true, "Exception 6 where the account fails standard check but is a foreign currency account.")]
-        [TestCase("938611", "07806039", true, "Exception 5 where the check passes.")]
-        [TestCase("938600", "42368003", true, "Exception 5 where the check passes with substitution.")]
-        [TestCase("938063", "55065200", true, "Exception 5 where both checks produce a remainder of 0 and pass.")]
-        [TestCase("772798", "99345694", true, "Exception 7 where passes but would fail the standard check.")]
-        [TestCase("086090", "06774744", true, "Exception 8 where the check passes.")]
-        [TestCase("309070", "02355688", true, "Exception 2 & 9 where the first check passes.")]
+        [TestCase("202959", "63748472", true)]
+        [TestCase("871427", "46238510", true)]
+        [TestCase("872427", "46238510", true)]
+        [TestCase("871427", "09123496", true)]
+        [TestCase("871427", "99123496", true)]
+        [TestCase("820000", "73688637", true)]
+        [TestCase("827999", "73988638", true)]
+        [TestCase("827101", "28748352", true)]
+        [TestCase("134020", "63849203", true)]
+        [TestCase("118765", "64371389", true)]
+        [TestCase("200915", "41011166", true)]
+        [TestCase("938611", "07806039", true)]
+        [TestCase("938600", "42368003", true)]
+        [TestCase("938063", "55065200", true)]
+        [TestCase("772798", "99345694", true)]
+        [TestCase("086090", "06774744", true)]
+        [TestCase("309070", "02355688", true)]
         [TestCase("309070", "12345668", true)]
         [TestCase("309070", "12345677", true)]
         [TestCase("309070", "99345694", true)]
@@ -48,6 +48,40 @@ namespace IsValid.Tests.String
         [TestCase("070116", "34012583", true)]
         [TestCase("074456", "11104102", true)]
         [TestCase("180002", "00000190", true)]
+
+
+        [TestCase("20-29-59", "63748472", true)]
+        [TestCase("87-14-27", "46238510", true)]
+        [TestCase("87-24-27", "46238510", true)]
+        [TestCase("87-14-27", "09123496", true)]
+        [TestCase("87-14-27", "99123496", true)]
+        [TestCase("82-00-00", "73688637", true)]
+        [TestCase("82-79-99", "73988638", true)]
+        [TestCase("82-71-01", "28748352", true)]
+        [TestCase("13-40-20", "63849203", true)]
+        [TestCase("11-87-65", "64371389", true)]
+        [TestCase("20-09-15", "41011166", true)]
+        [TestCase("93-86-11", "07806039", true)]
+        [TestCase("93-86-00", "42368003", true)]
+        [TestCase("93-80-63", "55065200", true)]
+        [TestCase("77 27 98", "993-45 694", true)]
+        [TestCase("08 60 90", "067-74 744", true)]
+        [TestCase("30 90 70", "023-55 688", true)]
+        [TestCase("30 90 70", "123-45 668", true)]
+        [TestCase("30 90 70", "123-45 677", true)]
+        [TestCase("30 90 70", "993-45 694", true)]
+        [TestCase("93 80 63", "157-64 273", false)]
+        [TestCase("93 80 63", "157-64 264", false)]
+        [TestCase("93 80 63", "157-63 217", false)]
+        [TestCase("11 87 65", "643-71 388", false)]
+        [TestCase("20 30 99", "668-31 036", false)]
+        [TestCase("20 30 99", "587-16 970", false)]
+        [TestCase("08 99 99", "663-74 959", false)]
+        [TestCase("10 79 99", "888-37 493", false)]
+        [TestCase("07 44 56", "123-45 112", true)]
+        [TestCase("07 01 16", "340-12 583", true)]
+        [TestCase("07 44 56", "111-04 102", true)]
+        [TestCase("18 00 02", "000-00 190", true)]
         public void IsValid(string sortCode, string accountNo, bool isValid)
         {
             var validator = accountNo.IsValid("en-GB");
@@ -216,9 +250,7 @@ namespace IsValid.Tests.String
             var result = validator.BankAccount("309070");
             Assert.IsTrue(result, validator.Errors.Select(x => x.ErrorMessage).FirstOrDefault());
         }
-
-
-
+        
         [Test(Description = "Exception 2 & 9 where a≠0 and g≠9 and passes.")]
         public void Exception2And9_An0_Gn9_FailPass()
         {
