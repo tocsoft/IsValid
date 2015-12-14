@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,15 +9,16 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using IsValid.BankAccounts;
 
 namespace IsValid
 {
-    public static partial class IsBankAccount
+    public static class IsBankAccount
     {
-        static IsBankAccount()
-        {
-            LoadUKValidationRules("data.bank.uk.weightings.txt", "data.bank.uk.sortcode.txt");
-        }
+        static readonly IDictionary<string, Func<ValidatableValue<string>, string, bool>> validatorsWithBranch
+            = new Dictionary<string, Func<ValidatableValue<string>, string, bool>> {
+            { "en-GB", IsUKBankAccount.UKBankAccount}
+        };
 
         public static bool BankAccount(this ValidatableValue<string> inputV)
         {
@@ -30,33 +32,35 @@ namespace IsValid
         /// <returns></returns>
         public static bool BankAccount(this ValidatableValue<string> inputV, string branchNumber)
         {
-            var validatables = inputV.Locale.Select(l => new ValidatableValue<string>(inputV.Value, l)).ToList();
+            var errors = new List<ValidationResult>();
 
-            foreach (var l in validatables)
+            foreach (var l in inputV.Locale)
             {
-                var loc = l.Locale.Single();
-                if (loc == "en-GB")
+                var validator = new ValidatableValue<string>(inputV.Value, l);
+
+                if (validatorsWithBranch.ContainsKey(l))
                 {
-                    UK.Validate(inputV, branchNumber);
+                    if (validatorsWithBranch[l](validator, branchNumber))
+                    {
+                        //is valid no errors
+                        return true;
+                    }
                 }
                 else
                 {
-                    l.AddError($"Unable to validate banks for {loc}");
+                    validator.AddError($"Unable to validate banks for '{l}'");
+
                 }
+                errors.AddRange(validator.Errors);
             }
 
-            //if none are valid lets show us some validation errors
-            if (!validatables.Any(x => x.IsValid))
+            //lets add all the validation errors (if invalid to the source validatable)
+            foreach (var r in errors)
             {
-                var res = validatables.First();
-                foreach (var r in res.Errors)
-                {
-                    inputV.AddError(r);
-                }
+                inputV.AddError(r);
             }
 
             return inputV.IsValid;
         }
-
     }
 }

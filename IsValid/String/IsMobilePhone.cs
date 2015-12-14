@@ -28,7 +28,7 @@ namespace IsValid
             { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) }
         };
 
-        private static bool MobilePhone(this ValidatableValue<string> phoneNumber, string locale)
+        private static bool IsLocalPhone(ValidatableValue<string> phoneNumber, string locale)
         {
             if (!phoneNumber.IsValueSet || string.IsNullOrWhiteSpace(phoneNumber.Value))
             {
@@ -53,7 +53,7 @@ namespace IsValid
         /// </remarks>
         public static bool MobilePhone(this ValidatableValue<string> phoneNumber)
         {
-            if (!phoneNumber.Locale.Any(x => phoneNumber.MobilePhone(x)))
+            if (!phoneNumber.Locale.Any(loc => IsLocalPhone(phoneNumber, loc)))
             {
                 phoneNumber.AddError("Not a recognised mobile phone number");
             }

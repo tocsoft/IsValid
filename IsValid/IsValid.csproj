@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="String\BankAccounts\UK.cs" />
+    <Compile Include="String\BankAccounts\IsUKBankAccount.cs" />
     <Compile Include="Constants\CountryCodes.cs" />
     <Compile Include="Object\IsValidModel.cs" />
     <Compile Include="String\IsBankAccount.cs" />
