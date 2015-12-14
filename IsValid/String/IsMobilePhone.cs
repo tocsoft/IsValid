@@ -25,7 +25,8 @@ namespace IsValid
             { "en-ZM", new Regex(@"^((\+|00)26)?09[567]\d{7}$", RegexOptions.Compiled) },
             { "ru-RU", new Regex(@"^((\+|00)?7|8)?9\d{9}$", RegexOptions.Compiled) },
             { "nb-NO", new Regex(@"^((\+|00)?47)?[49]\d{7}$", RegexOptions.Compiled) },
-            { "nn-NO", new Regex(@"^((\+|00)?47)?[49]\d{7}$", RegexOptions.Compiled) }
+            { "nn-NO", new Regex(@"^((\+|00)?47)?[49]\d{7}$", RegexOptions.Compiled) },
+            { "nl-NL", new Regex(@"^((\+|00)31|0)6\d{7}$", RegexOptions.Compiled) }
         };
 
         private static bool IsLocalPhone(ValidatableValue<string> phoneNumber, string locale)

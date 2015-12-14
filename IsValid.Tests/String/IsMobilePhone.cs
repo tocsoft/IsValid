@@ -197,7 +197,12 @@ namespace IsValid.Tests.String
                 new TestCaseData("19676338855", "nn-NO").Returns(false),
                 new TestCaseData("+4726338855", "nn-NO").Returns(false),
                 new TestCaseData("4736338855", "nn-NO").Returns(false),
-                new TestCaseData("66338855", "nn-NO").Returns(false)
+                new TestCaseData("66338855", "nn-NO").Returns(false),
+
+                new TestCaseData("061234567", "nl-NL").Returns(true),
+                new TestCaseData("+3161234567", "nl-NL").Returns(true),
+                new TestCaseData("003161234567", "nl-NL").Returns(true),
+                new TestCaseData("021234567", "nl-NL").Returns(false)
         };
 
         [Test]
