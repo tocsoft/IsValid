@@ -25,10 +25,11 @@ namespace IsValid
             { "en-ZM", new Regex(@"^(\+26)?09[567]\d{7}$", RegexOptions.Compiled) },
             { "ru-RU", new Regex(@"^(\+?7|8)?9\d{9}$", RegexOptions.Compiled) },
             { "nb-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
-            { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) }
+            { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
+            { "nl-NL", new Regex(@"^(\+31|0)6\d{7}$", RegexOptions.Compiled) }
         };
 
-        private static bool IsLocalPhone(ValidatableValue<string> phoneNumber, string locale)
+        private static bool IsLocalPhone(ValidatableValue<string> phoneNumber, string locale, string exitCode)
         {
             if (!phoneNumber.IsValueSet || string.IsNullOrWhiteSpace(phoneNumber.Value))
             {
@@ -38,7 +39,14 @@ namespace IsValid
             Regex localeRegex;
             if (LocaleMobilePhoneRegexes.TryGetValue(locale, out localeRegex))
             {
-                return localeRegex.IsMatch(phoneNumber.Value);
+                var number = phoneNumber.Value;
+
+                if (exitCode != null && number.StartsWith(exitCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    number = "+" + number.Substring(exitCode.Length);
+                }
+
+                return localeRegex.IsMatch(number);
             }
             return false;
         }
@@ -53,7 +61,23 @@ namespace IsValid
         /// </remarks>
         public static bool MobilePhone(this ValidatableValue<string> phoneNumber)
         {
-            if (!phoneNumber.Locale.Any(loc => IsLocalPhone(phoneNumber, loc)))
+            return MobilePhone(phoneNumber, null);
+        }
+
+        /// <summary>
+        /// Determines whether the given phone number is a mobile phone number or not. Based on the current locale of the executing thread
+        /// </summary>
+        /// <param name="phoneNumber">The phone number to check.</param>
+        /// <param name="exitCode">The exit code.</param>
+        /// <returns>
+        /// True if it is a mobile phone number, false otherwise.
+        /// </returns>
+        /// <remarks>
+        /// Relies on locales that use specific blocks of numbers for mobile phone numbers.
+        /// </remarks>
+        public static bool MobilePhone(this ValidatableValue<string> phoneNumber, string exitCode)
+        {
+            if (!phoneNumber.Locale.Any(loc => IsLocalPhone(phoneNumber, loc, exitCode)))
             {
                 phoneNumber.AddError("Not a recognised mobile phone number");
             }
