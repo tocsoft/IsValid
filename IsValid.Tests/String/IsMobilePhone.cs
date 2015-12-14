@@ -115,6 +115,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("447700956823", "en-GB").Returns(true),
                 new TestCaseData("+447700956823", "en-GB").Returns(true),
                 new TestCaseData("07700956823", "en-GB").Returns(true),
+                new TestCaseData("00447700956823", "en-GB").Returns(true),
                 new TestCaseData("67699567", "en-GB").Returns(false),
                 new TestCaseData("0770095682", "en-GB").Returns(false),
                 new TestCaseData("077009f6823", "en-GB").Returns(false),
@@ -128,6 +129,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("19876543210", "en-US").Returns(true),
                 new TestCaseData("8005552222", "en-US").Returns(true),
                 new TestCaseData("+15673628910", "en-US").Returns(true),
+                new TestCaseData("0015673628910", "en-US").Returns(true),
                 new TestCaseData("564785", "en-US").Returns(false),
                 new TestCaseData("0123456789", "en-US").Returns(false),
                 new TestCaseData("1437439210", "en-US").Returns(false),
@@ -143,6 +145,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("+260956684590", "en-ZM").Returns(true),
                 new TestCaseData("+260966684590", "en-ZM").Returns(true),
                 new TestCaseData("+260976684590", "en-ZM").Returns(true),
+                new TestCaseData("00260976684590", "en-ZM").Returns(true),
                 new TestCaseData("12345", "en-ZM").Returns(false),
                 new TestCaseData("", "en-ZM").Returns(false),
                 new TestCaseData("Vml2YW11cyBmZXJtZtesting123", "en-ZM").Returns(false),
@@ -151,6 +154,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("260976684590", "en-ZM").Returns(false),
 
                 new TestCaseData("+79676338855", "ru-RU").Returns(true),
+                new TestCaseData("0079676338855", "ru-RU").Returns(true),
                 new TestCaseData("79676338855", "ru-RU").Returns(true),
                 new TestCaseData("89676338855", "ru-RU").Returns(true),
                 new TestCaseData("9676338855", "ru-RU").Returns(true),
@@ -163,6 +167,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("6676338855", "ru-RU").Returns(false),
                 new TestCaseData("+99676338855", "ru-RU").Returns(false),
 
+                new TestCaseData("004796338855", "nb-NO").Returns(true),
                 new TestCaseData("+4796338855", "nb-NO").Returns(true),
                 new TestCaseData("+4746338855", "nb-NO").Returns(true),
                 new TestCaseData("4796338855", "nb-NO").Returns(true),
@@ -178,6 +183,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("4736338855", "nb-NO").Returns(false),
                 new TestCaseData("66338855", "nb-NO").Returns(false),
 
+                new TestCaseData("004796338855", "nn-NO").Returns(true),
                 new TestCaseData("+4796338855", "nn-NO").Returns(true),
                 new TestCaseData("+4746338855", "nn-NO").Returns(true),
                 new TestCaseData("4796338855", "nn-NO").Returns(true),
