@@ -362,5 +362,14 @@ namespace IsValid.Tests.String
             var result = validator.BankAccount("180002");
             Assert.IsTrue(result, validator.Errors.Select(x => x.ErrorMessage).FirstOrDefault());
         }
+
+
+        [Test(Description = "account code too short")]
+        public void shortAccountCode()
+        {
+            var validator = "8888888".IsValid("en-GB");
+            var result = validator.BankAccount("180002");
+            Assert.IsFalse(result, validator.Errors.Select(x => x.ErrorMessage).FirstOrDefault());
+        }
     }
 }

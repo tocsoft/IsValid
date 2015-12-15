@@ -112,7 +112,7 @@ namespace IsValid.BankAccounts
 
             if (cleanedAccountNumber.Length < 8)
             {
-                cleanedAccountNumber = cleanedAccountNumber.PadLeft('0');//padded
+                cleanedAccountNumber = cleanedAccountNumber.PadLeft(8, '0');//padded
             }
 
             if (cleanedAccountNumber.Length == 9)
@@ -183,6 +183,7 @@ namespace IsValid.BankAccounts
             else
             {
                 var secondTest = validator.Skip(1).FirstOrDefault();
+
                 if (firstTest.Exception == 2)
                 {
                     combindAccountRef = "309634" + cleanedAccountNumber;
@@ -192,11 +193,13 @@ namespace IsValid.BankAccounts
 
                 if (new[] { 2, 9, 10, 11, 12, 13, 14 }.Contains(firstTest.Exception))
                 {
-                    if (secondTest.Calculate(combindAccountRef))
+                    if (secondTest?.Calculate(combindAccountRef) == true)
                     {
                         return accountValidatable.IsValid;
                     }
                 }
+
+
             }
 
             accountValidatable.AddError("Invalid account details");
