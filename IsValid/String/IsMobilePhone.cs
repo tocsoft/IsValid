@@ -41,6 +41,7 @@ namespace IsValid
             {
                 var number = phoneNumber.Value;
 
+                number = Regex.Replace(number, "[- ]", "");
                 if (exitCode != null && number.StartsWith(exitCode, StringComparison.OrdinalIgnoreCase))
                 {
                     number = "+" + number.Substring(exitCode.Length);

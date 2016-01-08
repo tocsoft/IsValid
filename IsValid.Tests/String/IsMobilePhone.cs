@@ -36,7 +36,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("12345", "zh-TW", "00").Returns(false),
                 new TestCaseData("", "zh-TW", "00").Returns(false),
                 new TestCaseData("Vml2YW11cyBmZXJtZtesting123", "zh-TW", "00").Returns(false),
-                new TestCaseData("0-987123456", "zh-TW", "00").Returns(false),
+                new TestCaseData("0-987123456", "zh-TW", "00").Returns(true),
 
                 new TestCaseData("15323456787", "en", "00").Returns(false),
                 new TestCaseData("13523333233", "en", "00").Returns(false),
@@ -202,7 +202,21 @@ namespace IsValid.Tests.String
                 new TestCaseData("061234567", "nl-NL", "00").Returns(true),
                 new TestCaseData("+3161234567", "nl-NL", "00").Returns(true),
                 new TestCaseData("003161234567", "nl-NL", "00").Returns(true),
-                new TestCaseData("021234567", "nl-NL", "00").Returns(false)
+                new TestCaseData("021234567", "nl-NL", "00").Returns(false),
+
+                new TestCaseData("44770 0956-823", "en-GB", "00").Returns(true),
+                new TestCaseData("+4477009 56823", "en-GB", "00").Returns(true),
+                new TestCaseData("0770 095 6823", "en-GB", "00").Returns(true),
+                new TestCaseData("00447 700-956823", "en-GB", "00").Returns(true),
+                new TestCaseData("67699567", "en-GB", "00").Returns(false),
+                new TestCaseData("07700 95 682", "en-GB", "00").Returns(false),
+                new TestCaseData("077009f 6823", "en-GB", "00").Returns(false),
+                new TestCaseData("+07700956823", "en-GB", "00").Returns(false),
+                new TestCaseData("01524 56999", "en-GB", "00").Returns(false),
+                new TestCaseData("44207 3456754", "en-GB", "00").Returns(false),
+                new TestCaseData("+4430 03 434751", "en-GB", "00").Returns(false),
+                new TestCaseData("050734567 54", "en-GB", "00").Returns(false),
+                new TestCaseData("080011  23123", "en-GB", "00").Returns(false),
         };
 
 
