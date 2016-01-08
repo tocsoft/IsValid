@@ -36,7 +36,7 @@ namespace IsValid.Tests.String
                 new TestCaseData("12345", "zh-TW", "00").Returns(false),
                 new TestCaseData("", "zh-TW", "00").Returns(false),
                 new TestCaseData("Vml2YW11cyBmZXJtZtesting123", "zh-TW", "00").Returns(false),
-                new TestCaseData("0-987123456", "zh-TW", "00").Returns(true),
+                new TestCaseData("0-987123456", "zh-TW", "00").Returns(false),
 
                 new TestCaseData("15323456787", "en", "00").Returns(false),
                 new TestCaseData("13523333233", "en", "00").Returns(false),

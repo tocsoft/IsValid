@@ -10,23 +10,23 @@ namespace IsValid
 {
     public static class IsMobilePhone
     {
-        private static Dictionary<string, Regex> LocaleMobilePhoneRegexes = new Dictionary<string, Regex>
+        private static Dictionary<string, Validator> LocaleMobilePhoneRegexes = new Dictionary<string, Validator>
         {
-            { "zh-CN", new Regex(@"^(\+?0?86\-?)?1[345789][0-9]{9}$", RegexOptions.Compiled) },
-            { "zh-TW", new Regex(@"^(\+?886\-?|0)?9\d{8}$", RegexOptions.Compiled) },
-            { "en-ZA", new Regex(@"^(\+?27|0)(\d{9})$", RegexOptions.Compiled) },
-            { "en-AU", new Regex(@"^(\+?61|0)4(\d{8})$", RegexOptions.Compiled) },
-            { "fr-FR", new Regex(@"^(\+?33|0)(6|7)\d{8}$", RegexOptions.Compiled) },
-            { "en-HK", new Regex(@"^(\+?852\-?)?[569]\d{3}\-?\d{4}$", RegexOptions.Compiled) },
-            { "pt-PT", new Regex(@"^(\+351)?9[1236]\d{7}$", RegexOptions.Compiled) },
-            { "el-GR", new Regex(@"^(\+30)?((2\d{9})|(69\d{8}))$", RegexOptions.Compiled) },
-            { "en-GB", new Regex(@"^(\+?44|0)7\d{9}$", RegexOptions.Compiled) },
-            { "en-US", new Regex(@"^(\+?1)?[2-9]\d{2}[2-9](?!11)\d{6}$", RegexOptions.Compiled) },
-            { "en-ZM", new Regex(@"^(\+26)?09[567]\d{7}$", RegexOptions.Compiled) },
-            { "ru-RU", new Regex(@"^(\+?7|8)?9\d{9}$", RegexOptions.Compiled) },
-            { "nb-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
-            { "nn-NO", new Regex(@"^(\+?47)?[49]\d{7}$", RegexOptions.Compiled) },
-            { "nl-NL", new Regex(@"^(\+31|0)6\d{7}$", RegexOptions.Compiled) }
+            { "zh-CN", new Validator(@"^(\+?0?86\-?)?1[345789][0-9]{9}$") },
+            { "zh-TW", new Validator(@"^(\+?886\-?|0)?9\d{8}$") },
+            { "en-ZA", new Validator(@"^(\+?27|0)(\d{9})$") },
+            { "en-AU", new Validator(@"^(\+?61|0)4(\d{8})$") },
+            { "fr-FR", new Validator(@"^(\+?33|0)(6|7)\d{8}$") },
+            { "en-HK", new Validator(@"^(\+?852\-?)?[569]\d{3}\-?\d{4}$") },
+            { "pt-PT", new Validator(@"^(\+351)?9[1236]\d{7}$") },
+            { "el-GR", new Validator(@"^(\+30)?((2\d{9})|(69\d{8}))$") },
+            { "en-GB", new Validator(@"^(\+?44|0)7\d{9}$", " ", "-") },
+            { "en-US", new Validator(@"^(\+?1)?[2-9]\d{2}[2-9](?!11)\d{6}$") },
+            { "en-ZM", new Validator(@"^(\+26)?09[567]\d{7}$") },
+            { "ru-RU", new Validator(@"^(\+?7|8)?9\d{9}$") },
+            { "nb-NO", new Validator(@"^(\+?47)?[49]\d{7}$") },
+            { "nn-NO", new Validator(@"^(\+?47)?[49]\d{7}$") },
+            { "nl-NL", new Validator(@"^(\+31|0)6\d{7}$") }
         };
 
         private static bool IsLocalPhone(ValidatableValue<string> phoneNumber, string locale, string exitCode)
@@ -36,18 +36,10 @@ namespace IsValid
                 return false;
             }
 
-            Regex localeRegex;
-            if (LocaleMobilePhoneRegexes.TryGetValue(locale, out localeRegex))
+            Validator validator;
+            if (LocaleMobilePhoneRegexes.TryGetValue(locale, out validator))
             {
-                var number = phoneNumber.Value;
-
-                number = Regex.Replace(number, "[- ]", "");
-                if (exitCode != null && number.StartsWith(exitCode, StringComparison.OrdinalIgnoreCase))
-                {
-                    number = "+" + number.Substring(exitCode.Length);
-                }
-
-                return localeRegex.IsMatch(number);
+                return validator.Validate(phoneNumber.Value, exitCode);
             }
             return false;
         }
@@ -83,6 +75,34 @@ namespace IsValid
                 phoneNumber.AddError("Not a recognised mobile phone number");
             }
             return phoneNumber.IsValid;
+        }
+
+        private class Validator
+        {
+            private readonly string[] _ignoredCharacters;
+            private readonly Regex _regex;
+
+            public Validator(string regexPatterns, params string[] ignoredCharacters)
+            {
+                _regex = new Regex(regexPatterns, RegexOptions.Compiled);
+                _ignoredCharacters = ignoredCharacters ?? new string[0];
+            }
+
+            public bool Validate(string number, string exitCode)
+            {
+                foreach (var c in _ignoredCharacters)
+                {
+                    number = number.Replace(c, "");
+                }
+
+                if (exitCode != null && number.StartsWith(exitCode, StringComparison.OrdinalIgnoreCase))
+                {
+                    number = "+" + number.Substring(exitCode.Length);
+                }
+
+
+                return _regex.IsMatch(number);
+            }
         }
     }
 }
