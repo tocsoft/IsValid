@@ -5,7 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if PCL
+namespace IsValid.PCL.Tests.Object
+#else
 namespace IsValid.Tests.Object
+#endif
 {
     [TestFixture]
     public class IsValidModel

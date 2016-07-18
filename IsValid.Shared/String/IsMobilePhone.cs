@@ -84,7 +84,11 @@ namespace IsValid
 
             public Validator(string regexPatterns, params string[] ignoredCharacters)
             {
+#if PCL
+                _regex = new Regex(regexPatterns);
+#else
                 _regex = new Regex(regexPatterns, RegexOptions.Compiled);
+#endif
                 _ignoredCharacters = ignoredCharacters ?? new string[0];
             }
 

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1b9fd0bc-28fc-4a1e-b502-8f70e00e08f5</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>IsValid</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants\CountryCodes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Object\IsValidModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\BankAccounts\IsUKBankAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsBankAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsBusinessIdentifierCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsCreditCard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsIban.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsIsbn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsLowercase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsMobilePhone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsNumeric.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)String\IsUppercase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ValidatableValue.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)data\bank\uk\sortcode.txt" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)data\bank\uk\weightings.txt" />
+  </ItemGroup>
+</Project>

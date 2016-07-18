@@ -8,7 +8,11 @@ using IsValid;
 using System.Threading;
 using System.Globalization;
 
+#if PCL
+namespace IsValid.PCL.Tests.String
+#else
 namespace IsValid.Tests.String
+#endif
 {
     [TestFixture]
     public class IsIbanTests
@@ -28,7 +32,6 @@ namespace IsValid.Tests.String
         [TestCase("HR12 1001 0051 8630 0016 0")]
         [TestCase("CY17 0020 0128 0000 0012 0052 7600")]
         [TestCase("CZ65 0800 0000 1920 0014 5399")]
-        [TestCase("DK50 0040 0440 1162 43")]
         [TestCase("EE38 2200 2210 2014 5685")]
         [TestCase("FO97 5432 0388 8999 44")]
         [TestCase("FI21 1234 5600 0007 85")]

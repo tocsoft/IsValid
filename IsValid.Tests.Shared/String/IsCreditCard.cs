@@ -8,7 +8,11 @@ using IsValid;
 using System.Threading;
 using System.Globalization;
 
+#if PCL
+namespace IsValid.PCL.Tests.String
+#else
 namespace IsValid.Tests.String
+#endif
 {
     [TestFixture]
     public class IsCreditCard

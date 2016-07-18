@@ -8,23 +8,27 @@ using IsValid;
 using System.Threading;
 using System.Globalization;
 
+#if PCL
+namespace IsValid.PCL.Tests.String
+#else
 namespace IsValid.Tests.String
+#endif
 {
     [TestFixture]
-    public class IsLowercase
+    public class IsUppercase
     {
 
         [Test]
         [TestCase(null, true)]
-        [TestCase("foo", true)]
-        [TestCase("FOO", false)]
+        [TestCase("foo", false)]
+        [TestCase("FOO", true)]
         [TestCase("123", true)]
-        [TestCase("foo123", true)]
-        [TestCase("FOO123", false)]
+        [TestCase("foo123", false)]
+        [TestCase("FOO123", true)]
         [TestCase("Foo123", false)]
-        public void IsLowercaseTest(string value, bool expected)
+        public void IsUppercaseTest(string value, bool expected)
         {
-            Assert.AreEqual(expected, value.IsValid().Lowercase());
+            Assert.AreEqual(expected, value.IsValid().Uppercase());
         }
     }
 }

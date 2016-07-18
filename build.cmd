@@ -34,7 +34,7 @@ msbuild IsValid.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild
 REM Package
 ECHO Building pacakges
 mkdir Build
-call "%nuget%" pack "IsValid\IsValid.csproj" -IncludeReferencedProjects -o Build -p Configuration=%config% %version%
+call "%nuget%" pack "IsValid.PCL\IsValid.PCL.csproj" -IncludeReferencedProjects -o Build -p Configuration=%config% %version%
 if not "%errorlevel%"=="0" goto failure
 
 

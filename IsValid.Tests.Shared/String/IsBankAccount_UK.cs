@@ -8,7 +8,11 @@ using IsValid;
 using System.Threading;
 using System.Globalization;
 
+#if PCL
+namespace IsValid.PCL.Tests.String
+#else
 namespace IsValid.Tests.String
+#endif
 {
     //test cases taken from https://www.vocalink.com/customer-support/modulus-checking/
     [TestFixture]

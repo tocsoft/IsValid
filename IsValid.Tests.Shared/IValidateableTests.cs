@@ -6,7 +6,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+#if PCL
+namespace IsValid.PCL.Tests
+#else
 namespace IsValid.Tests
+#endif
 {
     [TestFixture]
     public class IValidateableTests

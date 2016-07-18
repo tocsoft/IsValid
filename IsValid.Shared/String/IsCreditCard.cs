@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -28,11 +27,21 @@ namespace IsValid
             }
             else
             {
-                int sumOfDigits = input
-                    .Where((e) => e >= '0' && e <= '9')
-                    .Reverse()
-                    .Select((e, i) => ((int)e - 48) * (i % 2 == 0 ? 1 : 2))
-                    .Sum((e) => e / 10 + e % 10);
+
+                var sumOfDigits = 0;
+                var pos = 0;
+                for (var i = input.Length - 1; i >= 0; i--)
+                {
+                    var e = input[i];
+                    if (e >= '0' && e <= '9')
+                    {
+                        var v = ((int)e - 48) * (pos % 2 == 0 ? 1 : 2);
+
+                        sumOfDigits += v / 10 + v % 10;
+
+                        pos++;
+                    }
+                }
 
                 if (sumOfDigits % 10 != 0)
                 {

@@ -53,23 +53,29 @@ namespace IsValid.BankAccounts
             resources = resources ?? assembly.GetManifestResourceNames();
 
             var resourcePrefix = "IsValid.";
-
+#if !PCL
             if (File.Exists(modulusWeightTable))
             {
                 modulusWeightTable = File.ReadAllText(modulusWeightTable);
             }
-            else if (resources.Contains(resourcePrefix + modulusWeightTable))
+            else 
+#endif
+            if (resources.Contains(resourcePrefix + modulusWeightTable))
             {
                 using (var sr = new StreamReader(assembly.GetManifestResourceStream(resourcePrefix + modulusWeightTable)))
                 {
                     modulusWeightTable = sr.ReadToEnd();
                 }
             }
+
+#if !PCL
             if (File.Exists(substitutionData))
             {
                 substitutionData = File.ReadAllText(substitutionData);
             }
-            else if (resources.Contains(resourcePrefix + substitutionData))
+            else
+#endif
+            if (resources.Contains(resourcePrefix + substitutionData))
             {
                 using (var sr = new StreamReader(assembly.GetManifestResourceStream(resourcePrefix + substitutionData)))
                 {

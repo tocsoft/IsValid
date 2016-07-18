@@ -188,7 +188,8 @@ namespace IsValid
                 val = sb.ToString();
                 val = val.Substring(6) + val.Substring(0, 6);
 
-                var intVal = System.Numerics.BigInteger.Parse(val);
+                
+                var intVal = BigIntegerHelpers.Parse(val);
 
                 var remainder = System.Numerics.BigInteger.Remainder(intVal, new System.Numerics.BigInteger(97));
                 if (!remainder.IsOne)

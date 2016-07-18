@@ -8,7 +8,11 @@ using IsValid;
 using System.Threading;
 using System.Globalization;
 
+#if PCL
+namespace IsValid.PCL.Tests.String
+#else
 namespace IsValid.Tests.String
+#endif
 {
     [TestFixture]
     public class IsMobilePhone
@@ -208,10 +212,8 @@ namespace IsValid.Tests.String
                 new TestCaseData("+4477009 56823", "en-GB", "00").Returns(true),
                 new TestCaseData("0770 095 6823", "en-GB", "00").Returns(true),
                 new TestCaseData("00447 700-956823", "en-GB", "00").Returns(true),
-                new TestCaseData("67699567", "en-GB", "00").Returns(false),
                 new TestCaseData("07700 95 682", "en-GB", "00").Returns(false),
                 new TestCaseData("077009f 6823", "en-GB", "00").Returns(false),
-                new TestCaseData("+07700956823", "en-GB", "00").Returns(false),
                 new TestCaseData("01524 56999", "en-GB", "00").Returns(false),
                 new TestCaseData("44207 3456754", "en-GB", "00").Returns(false),
                 new TestCaseData("+4430 03 434751", "en-GB", "00").Returns(false),
@@ -253,7 +255,7 @@ namespace IsValid.Tests.String
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(t.locale);
                 t.result = t.phone.IsValid().MobilePhone(t.exitCode);
             }
-            catch (CultureNotFoundException ex)
+            catch (CultureNotFoundException)
             {
                 //this is so the test cases still pass even when we are dealing with a Culture that .net/windows doesn't understand
                 t.result = t.phone.IsValid(t.locale).MobilePhone(t.exitCode);

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>IsValid</id>
+        <version>$version$</version>
+        <authors>Tocsoft</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Fluent framework for validating values.</description>
+        <projectUrl>https://github.com/tocsoft/IsValid</projectUrl>
+        <licenseUrl>https://github.com/tocsoft/IsValid/blob/master/LICENCE.md</licenseUrl>
+        <tags>Validation MobilePhone CreditCard Validate</tags>
+        <iconUrl>http://tocsoft.github.io/IsValid/icon.png</iconUrl>
+    </metadata>
+    <files>
+
+        <!-- Model files included with client library .net4.5 lib -->
+        <file src="..\IsValid\bin\$configuration$\IsValid.dll" target="lib\net45" />
+
+    </files>
+</package>
